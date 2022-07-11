@@ -1,0 +1,72 @@
+{
+  "name": "vue3-test",
+  "author": "Youngin Kwak",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./dist/main/main.cjs",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development ts-node scripts/devServer.ts",
+    "dev:renderer": "vite packages/renderer",
+    "build": "ts-node scripts/build.ts && electron-builder",
+    "release": "ts-node scripts/build.ts && electron-builder --publish=always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kkan0615/vue3-starter"
+  },
+  "build": {
+    "appId": "com.my-website.my-frist-electron",
+    "productName": "My-first-electron",
+    "copyright": "Copyright © 2022 ${author}",
+    "publish": [
+      {
+        "provider": "github",
+        "private": true,
+        "owner": "kkan0615",
+        "repo": "vue3-starter"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "publish": [
+        "github"
+      ],
+      "target": [
+        "zip",
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "dist/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist_electron"
+    }
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "@types/node": "^17.0.41",
+    "@typescript-eslint/parser": "^5.27.1",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "cross-env": "^7.0.3",
+    "electron": "^19.0.4",
+    "electron-builder": "^23.0.3",
+    "eslint": "^8.17.0",
+    "eslint-plugin-vue": "^9.1.0",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9",
+    "vue-tsc": "^0.34.7"
+  }
+}
