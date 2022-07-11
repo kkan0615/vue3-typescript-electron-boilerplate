@@ -32,16 +32,24 @@
 ## Vue structure (Renderer)
 ```
 ├─ index.html               # Index html
-│  ├─ src/
-│  │  ├─ assets/            # Assets for renderer.
-│  │  ├─ components/        # Contain global components.
-│  │  ├─ store/             # Pinina or vue-store.
-│  │  ├─ router/            # Router.
-│  │  ├─ types/             # Types.
-│  │  ├─ views/             # Contain View pages.
-│  │  ├─ utils/             # Contain utilites.
-│  │  ├─ styles/            # Global Styles.
-│  │  │  ├─ electorn.ts     # Electoron utils such as ipcRender.
+├─ src/
+│  ├─ assets/                   # Assets for renderer.
+│  ├─ components/               # Contain global components.
+│  ├─ locales/                  # i18n, locaels.
+│  │   ├─ langs/                # Lanuges collection.
+│  │   ├─ index.ts/             # i18n config.
+│  ├─ router/                   # Router.
+│  │   ├─ modules/              # Modulized router.
+│  │   ├─ index.ts/             # router config.
+│  ├─ store/                    # Pinina or vue-store.
+│  │   ├─ modules/              # Modulized store.
+│  │   ├─ index.ts/             # store config.
+│  ├─ styles/                   # Global Styles.
+│  ├─ types/                    # Types.
+│  ├─ utils/                    # Contain utilites.
+│  ├─ views/                    # Contain View pages.
+│  ├─ main.ts/                  # vue3 main file.
+│  ├─ App.vue/                  # App.vue.
 ├─ vite.config.ts           # Vite config for renderer source-code
 ├─ tsconfig.json            # Specific TypeScript config.
 ```
