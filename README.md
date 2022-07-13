@@ -1,4 +1,4 @@
-# Electron + vite + vue 3
+# Electron + vite3.0 + vue 3
 
 # Directory Structure
 ```

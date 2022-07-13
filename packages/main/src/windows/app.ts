@@ -18,14 +18,14 @@ export const createAppWindow = async () => {
     },
   })
 
-  const pageUrl = import.meta.env.DEV
-    ? 'http://localhost:3000'
+  const pageUrl = isDev
+    ? 'http://localhost:5173'
     : new URL('../dist/renderer/index.html', `file://${__dirname}`).toString()
-
-  await appWindow.loadURL(pageUrl)
 
   if (isDev) {
     // Open chrome devtools
     appWindow.webContents.openDevTools()
   }
+
+  await appWindow.loadURL(pageUrl)
 }
