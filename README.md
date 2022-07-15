@@ -1,5 +1,15 @@
 # Electron + vite3.0 + vue 3
 
+# Getting started
+## Dev
+```shell
+yarn dev
+```
+## Build
+```shell
+yarn build
+```
+
 # Directory Structure
 ```
 ├─ node_modules/
