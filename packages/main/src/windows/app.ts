@@ -17,9 +17,8 @@ export const createAppWindow = async () => {
       preload: path.join(__dirname, '../preload/index.cjs'),
     },
   })
-
   const pageUrl = isDev
-    ? 'http://localhost:5173'
+    ? process.env['VITE_DEV_SERVER_URL'] || 'http://localhost:3000'
     : new URL('../dist/renderer/index.html', `file://${__dirname}`).toString()
 
   if (isDev) {

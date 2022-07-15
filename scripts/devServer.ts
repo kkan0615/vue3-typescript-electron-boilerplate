@@ -100,6 +100,8 @@ const setupMainPackageWatcher = (viteServer: ViteDevServer) => {
  */
 ;(async () => {
   try {
+    // resolve electron Security Warning (Insecure Content-Security-Policy)
+    process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
     const viteDevServer = await createServer({
       ...sharedConfig,
       configFile: 'packages/renderer/vite.config.ts',
