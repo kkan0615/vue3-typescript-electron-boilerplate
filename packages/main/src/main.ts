@@ -1,7 +1,7 @@
-// packages/main/src/index.ts
-import { app } from 'electron'
+import { app, Notification, dialog, ipcMain, BrowserWindow } from 'electron'
 import { createAppWindow } from './windows/app'
 import { autoUpdater } from 'electron-updater'
+import isDev from 'electron-is-dev'
 
 const isSingleInstance = app.requestSingleInstanceLock()
 
@@ -31,18 +31,55 @@ app.on('activate', () => {
 app
   .whenReady()
   .then(async () => {
-    await autoUpdater.checkForUpdates()
     await createAppWindow()
+    await autoUpdater.checkForUpdates()
   })
   .catch((e) => console.error('Failed to create window:', e))
 
 
-autoUpdater.on('update-not-available', () => {
-  console.log('update-not-available')
+autoUpdater.on('error', (error, message) => {
+  if (!isDev) {
+    dialog.showMessageBox(null as any, {
+      type: 'error',
+      title: 'Error: auto-updater',
+      message: 'Error: auto-updater',
+      detail: message,
+    })
+  }
 })
+
+// autoUpdater.on('update-not-available', () => {
+//
+//   new Notification({
+//     title: 'update is not available',
+//     body: 'update is not available',
+//   }).show()
+//
+//   BrowserWindow.getAllWindows().map(window => {
+//     window.webContents.send('update-available')
+//   })
+// })
+
 /**
  * Check update is existed
  */
 autoUpdater.on('update-available', () => {
   console.log('update is available')
+
+  new Notification({
+    title: 'update is available',
+    body: 'update is available',
+  }).show()
+
+  BrowserWindow.getAllWindows().map(window => {
+    window.webContents.send('update-available')
+  })
 })
+
+/**
+ * Update program
+ */
+ipcMain.on('update-program',async () => {
+  await autoUpdater.quitAndInstall()
+})
+

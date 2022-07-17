@@ -1,7 +1,7 @@
 {
   "name": "vue3-test",
   "author": "Youngin Kwak",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "private": true,
   "main": "./dist/main/main.cjs",
   "scripts": {
@@ -15,7 +15,7 @@
     "url": "https://github.com/kkan0615/vue3-typescript-electron-boilerplate"
   },
   "build": {
-    "appId": "com.my-website.my-frist-electron",
+    "appId": "com.app.my.first.eletron",
     "productName": "My-first-electron",
     "copyright": "Copyright © 2022 ${author}",
     "publish": [
