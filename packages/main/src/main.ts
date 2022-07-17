@@ -1,6 +1,7 @@
 // packages/main/src/index.ts
 import { app } from 'electron'
 import { createAppWindow } from './windows/app'
+import { autoUpdater } from 'electron-updater'
 
 const isSingleInstance = app.requestSingleInstanceLock()
 
@@ -33,3 +34,10 @@ app
     await createAppWindow()
   })
   .catch((e) => console.error('Failed to create window:', e))
+
+/**
+ * Check update is existed
+ */
+autoUpdater.on('update-available', () => {
+  console.log('update is available')
+})

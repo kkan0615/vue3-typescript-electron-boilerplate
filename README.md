@@ -10,6 +10,13 @@ yarn dev
 yarn build
 ```
 
+# Dependencies
+- vue-router-v4
+- pinia
+- vue-i18n
+- eslint
+- sass/scss
+
 # Directory Structure
 ```
 ├─ node_modules/

@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kkan0615/vue3-starter"
+    "url": "https://github.com/kkan0615/vue3-typescript-electron-boilerplate"
   },
   "build": {
     "appId": "com.my-website.my-frist-electron",
@@ -23,7 +23,7 @@
         "provider": "github",
         "private": true,
         "owner": "kkan0615",
-        "repo": "vue3-starter"
+        "repo": "vue3-typescript-electron-boilerplate"
       }
     ],
     "mac": {
@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0",
+    "electron-updater": "^5.0.5",
     "vue": "^3.2.25"
   },
   "devDependencies": {
@@ -64,6 +65,7 @@
     "electron-builder": "^23.0.3",
     "eslint": "^8.17.0",
     "eslint-plugin-vue": "^9.1.0",
+    "sass": "^1.53.0",
     "ts-node": "^10.8.2",
     "typescript": "^4.5.4",
     "vite": "^3.0.0",
