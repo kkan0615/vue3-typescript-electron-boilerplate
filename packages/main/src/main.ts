@@ -31,10 +31,15 @@ app.on('activate', () => {
 app
   .whenReady()
   .then(async () => {
+    await autoUpdater.checkForUpdates()
     await createAppWindow()
   })
   .catch((e) => console.error('Failed to create window:', e))
 
+
+autoUpdater.on('update-not-available', () => {
+  console.log('update-not-available')
+})
 /**
  * Check update is existed
  */

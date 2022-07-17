@@ -12,6 +12,8 @@ export const createAppWindow = async () => {
     height: 720,
     webPreferences: {
       webviewTag: false,
+      nodeIntegration: true,
+      contextIsolation: false,
       // Electron current directory will be at `dist/main`, we need to include
       // the preload script from this relative path: `../preload/index.cjs`.
       preload: path.join(__dirname, '../preload/index.cjs'),

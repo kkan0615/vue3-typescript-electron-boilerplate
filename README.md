@@ -11,10 +11,14 @@ yarn build
 ```
 
 # Dependencies
-- vue-router-v4
-- pinia
-- vue-i18n
 - eslint
+
+## Electron
+- electron-builder
+- electron-is-dev
+- electron-updater
+
+## Renderer
 - sass/scss
 
 # Directory Structure
@@ -56,7 +60,7 @@ yarn build
 │  │   ├─ langs/                # Lanuges collection.
 │  │   ├─ index.ts/             # i18n config.
 │  ├─ router/                   # Router.
-│  │   ├─ modules/              # Modulized router.
+│  │   ├─ routes/               # Modulized router.
 │  │   ├─ index.ts/             # router config.
 │  ├─ store/                    # Pinina or vue-store.
 │  │   ├─ modules/              # Modulized store.
