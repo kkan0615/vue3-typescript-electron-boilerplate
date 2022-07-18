@@ -37,9 +37,9 @@ app
   .catch((e) => console.error('Failed to create window:', e))
 
 
-autoUpdater.on('error', (error, message) => {
+autoUpdater.on('error', async (error, message) => {
   if (!isDev) {
-    dialog.showMessageBox(null as any, {
+    await dialog.showMessageBox(null as any, {
       type: 'error',
       title: 'Error: auto-updater',
       message: 'Error: auto-updater',
@@ -66,6 +66,7 @@ autoUpdater.on('error', (error, message) => {
 autoUpdater.on('update-available', () => {
   console.log('update is available')
 
+  // inform update is available with notification
   new Notification({
     title: 'update is available',
     body: 'update is available',
@@ -74,6 +75,13 @@ autoUpdater.on('update-available', () => {
   BrowserWindow.getAllWindows().map(window => {
     window.webContents.send('update-available')
   })
+})
+
+/**
+ * Update program
+ */
+ipcMain.on('check-update',async () => {
+  await autoUpdater.checkForUpdates()
 })
 
 /**

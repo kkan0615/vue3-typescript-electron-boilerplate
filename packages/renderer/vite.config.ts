@@ -8,7 +8,6 @@ export default defineConfig({
   plugins: [vue()],
   root: __dirname,
   base: process.env.IS_DEV !== 'true' ? './' : '/',
-
   build: {
     sourcemap: true,
     emptyOutDir: true,
