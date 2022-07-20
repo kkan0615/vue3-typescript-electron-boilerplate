@@ -82,3 +82,4 @@ yarn build
 
 # Todo
 - Add auto-update
+- Logger for system
