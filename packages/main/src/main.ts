@@ -1,4 +1,4 @@
-import { app, Notification, dialog, ipcMain } from 'electron'
+import { app, Notification, dialog, ipcMain, BrowserWindow } from 'electron'
 import { createAppWindow } from './windows/app'
 import { autoUpdater } from 'electron-updater'
 import isDev from 'electron-is-dev'
@@ -48,14 +48,27 @@ autoUpdater.on('error', async (error, message) => {
   }
 })
 
+autoUpdater.on('update-not-available', async () => {
+  const focusedWindow = BrowserWindow.getFocusedWindow()
+  if (focusedWindow) {
+    focusedWindow.webContents.send('update-not-available')
+  }
+})
+
 /**
  * Check update when update is available when program is executed.
  */
-autoUpdater.once('update-available', () => {
+autoUpdater.on('update-available', (info) => {
+  // @TODO: Change to confirm
   new Notification({
     title: 'update is available',
-    body: 'update is available',
+    body: `${info.version} is available`,
   }).show()
+
+  const focusedWindow = BrowserWindow.getFocusedWindow()
+  if (focusedWindow) {
+    focusedWindow.webContents.send('update-available')
+  }
 })
 
 /**
@@ -64,8 +77,6 @@ autoUpdater.once('update-available', () => {
  */
 ipcMain.handle('check-update',async () => {
   await autoUpdater.checkForUpdates()
-
-  return autoUpdater.isUpdaterActive()
 })
 
 /**
