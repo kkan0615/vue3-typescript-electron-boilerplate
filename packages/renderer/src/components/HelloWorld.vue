@@ -51,10 +51,11 @@
   </div>
 </template>
 <script setup lang="ts">
+import packageJson from '../../../../package.json'
 import { ipcRenderer } from '@/utils/electron'
 import { onBeforeMount, ref } from 'vue'
 
-const version = process.env.npm_package_version
+const version = packageJson.version
 
 /* is update available */
 const isUpdateAvailable = ref(false)
