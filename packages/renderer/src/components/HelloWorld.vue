@@ -14,6 +14,7 @@
       <h1>
         Vue3 + Vite3.0 + Typescript + Electron
       </h1>
+      <!-- Checking loading for update -->
       <div
         v-if="isUpdateLoading"
       >
@@ -55,9 +56,14 @@ import { onBeforeMount, ref } from 'vue'
 
 const version = process.env.npm_package_version
 
+/* is update available */
 const isUpdateAvailable = ref(false)
+/* checking updating... */
 const isUpdateLoading = ref(false)
 
+/**
+ * Events update is available
+ */
 ipcRenderer.on('update-available', () => {
   isUpdateAvailable.value = true
 })
