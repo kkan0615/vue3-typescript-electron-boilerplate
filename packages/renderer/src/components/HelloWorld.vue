@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import packageJson from '../../../../package.json'
 import { ipcRenderer } from '@/utils/electron'
-import { onBeforeMount, ref } from 'vue'
+import { ref } from 'vue'
 
 const version = packageJson.version
 
@@ -73,14 +73,9 @@ ipcRenderer.on('update-not-available', () => {
   isUpdateAvailable.value = false
 })
 
-onBeforeMount(async () => {
-  isUpdateAvailable.value = await ipcRenderer.invoke('check-update')
-
-})
-
 const onClickCheckUpdateBtn = async () => {
   isUpdateLoading.value = true
-  isUpdateAvailable.value = await ipcRenderer.invoke('check-update')
+  await ipcRenderer.invoke('check-update')
   isUpdateLoading.value = false
 }
 
