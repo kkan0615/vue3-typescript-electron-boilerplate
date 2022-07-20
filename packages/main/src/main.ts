@@ -49,10 +49,9 @@ autoUpdater.on('error', async (error, message) => {
 })
 
 autoUpdater.on('update-not-available', async () => {
-  const focusedWindow = BrowserWindow.getFocusedWindow()
-  if (focusedWindow) {
-    focusedWindow.webContents.send('update-not-available')
-  }
+  BrowserWindow.getAllWindows().map(window => {
+    window.webContents.send('update-not-available')
+  })
 })
 
 /**
@@ -65,10 +64,9 @@ autoUpdater.on('update-available', (info) => {
     body: `${info.version} is available`,
   }).show()
 
-  const focusedWindow = BrowserWindow.getFocusedWindow()
-  if (focusedWindow) {
-    focusedWindow.webContents.send('update-available')
-  }
+  BrowserWindow.getAllWindows().map(window => {
+    window.webContents.send('update-available')
+  })
 })
 
 /**
