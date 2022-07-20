@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hellow-world />
+    <hello-world />
     <button
       v-if="updateAvailable"
       @click="onClickUpdateBtn"
@@ -11,16 +11,20 @@
 </template>
 <script setup lang="ts">
 import { ipcRenderer } from '@/utils/electron'
-import { ref } from 'vue'
-import HellowWorld from '@/components/HellowWorld.vue'
-
-const version = process.env.npm_package_version
+import { onMounted, ref } from 'vue'
+import HelloWorld from '@/components/HelloWorld.vue'
 
 const updateAvailable = ref(false)
 
 
 ipcRenderer.on('update-available', () => {
   updateAvailable.value = true
+})
+
+onMounted(async () => {
+  const isUpdateAvailable = await ipcRenderer.invoke('check-update')
+
+  console.log(isUpdateAvailable)
 })
 
 const onClickUpdateBtn = () => {

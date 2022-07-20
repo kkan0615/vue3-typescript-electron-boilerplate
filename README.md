@@ -31,7 +31,7 @@ yarn build
 │  ├─ renderer/           # Compiled output of renderer process.
 │  ├─ main/               # Compiled output of main process.
 │  ├─ preload/            # Compiled output of preload process.
-├─ dist_electron/         # Contain output of program such as exe file.
+├─ release/               # Contain output of program such as exe file.
 ├─ packages/
 │  ├─ renderer/           # Contains renderer process source-code.
 │  │  ├─ src/
@@ -78,7 +78,7 @@ yarn build
 ## Electron
 - https://github.com/cawa-93/vite-electron-builder
 - https://blog.totominc.io/blog/electron-with-typescript-and-vite-as-a-build-system
-- https://github.com/twstyled/electron-vite-react/blob/main/scripts/run-electron.ts
+- https://github.com/twstyled/electron-vite-react
 
 # Todo
 - Add auto-update
