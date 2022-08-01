@@ -2,6 +2,7 @@ import { app } from 'electron'
 import { createAppWindow } from './windows/app'
 import { autoUpdater } from 'electron-updater'
 import './utils/auto-updete'
+import './services'
 
 const isSingleInstance = app.requestSingleInstanceLock()
 

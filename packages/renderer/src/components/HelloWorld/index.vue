@@ -14,6 +14,13 @@
       <h1>
         Vue3 + Vite3.0 + Typescript + Electron
       </h1>
+      <div>
+        <button
+          @click="onClickHelloBtn"
+        >
+          Hello world logging
+        </button>
+      </div>
       <!-- Checking loading for update -->
       <div
         v-if="isUpdateLoading"
@@ -50,10 +57,17 @@
     </div>
   </div>
 </template>
+<script
+  lang="ts"
+>
+export default {
+  name: 'HelloWorld'
+}
+</script>
 <script setup lang="ts">
-import packageJson from '../../../../package.json'
-import { ipcRenderer } from '@/utils/electron'
+import packageJson from '../../../../../package.json'
 import { ref } from 'vue'
+import { useIpcRenderer } from '@vueuse/electron'
 
 const version = packageJson.version
 
@@ -61,6 +75,8 @@ const version = packageJson.version
 const isUpdateAvailable = ref(false)
 /* checking updating... */
 const isUpdateLoading = ref(false)
+
+const ipcRenderer = useIpcRenderer()
 
 /**
  * Events update is available
@@ -81,6 +97,10 @@ const onClickCheckUpdateBtn = async () => {
 
 const onClickUpdateBtn = () => {
   ipcRenderer.send('update-program')
+}
+
+const onClickHelloBtn = () => {
+  ipcRenderer.send('hello-world')
 }
 </script>
 <style lang="scss">
