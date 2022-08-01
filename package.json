@@ -9,6 +9,7 @@
     "dev:renderer": "vite packages/renderer",
     "build": "ts-node scripts/build.ts && electron-builder",
     "release": "ts-node scripts/build.ts && electron-builder --publish=always",
+    "test": "vitest",
     "test:main": "vitest run -r packages/main --passWithNoTests",
     "test:renderer": "vitest run -r packages/renderer --passWithNoTests"
   },
