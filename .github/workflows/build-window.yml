@@ -1,8 +1,8 @@
-name: build-test
+name: build-window
 on:
   pull_request: {} # run for every pull request
 jobs:
-  build-test:
+  build-window-test:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
