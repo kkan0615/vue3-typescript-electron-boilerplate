@@ -1,9 +1,14 @@
 node_modules
 .husky
-src/assets
+.github
+/packages/main/src/node_modules
+/packages/renderer/src/assets
+/packages/renderer/src/node_modules
+/packages/renderer/index.html
 public
 dist
 **/*.json
 **/*.scss
 **/*.md
 yarn.lock
+release
