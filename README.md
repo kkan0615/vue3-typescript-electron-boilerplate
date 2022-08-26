@@ -13,6 +13,7 @@ yarn build
 # Dependencies
 - eslint
 - vitest: Unit test
+- [Husky 8](https://github.com/typicode/husky)
 
 ## Electron
 - electron-builder: Builder
