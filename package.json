@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node scripts/devServer.ts",
     "dev:renderer": "vite packages/renderer",
-    "build": "ts-node scripts/build.ts && electron-builder",
+    "build:window": "ts-node scripts/build.ts && electron-builder",
     "release": "ts-node scripts/build.ts && electron-builder --publish=always",
     "test": "vitest",
     "test:once": "vitest run",

@@ -3,7 +3,7 @@ on:
   pull_request: {} # run for every pull request
 jobs:
   build-test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: borales/actions-yarn@v3.0.0
@@ -11,4 +11,4 @@ jobs:
           cmd: install # will run `yarn install` command
       - uses: borales/actions-yarn@v3.0.0
         with:
-          cmd: build # will run `yarn build` command
+          cmd: build:window # will run `yarn build` command
