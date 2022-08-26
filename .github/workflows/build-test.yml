@@ -1,3 +1,4 @@
+# Test only vite build
 name: build-test
 on:
   pull_request: {} # run for every pull request
@@ -11,4 +12,4 @@ jobs:
           cmd: install # will run `yarn install` command
       - uses: borales/actions-yarn@v3.0.0
         with:
-          cmd: build:window # will run `yarn build` command
+          cmd: build:test # will run `yarn build` command
