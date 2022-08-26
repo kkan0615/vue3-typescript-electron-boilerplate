@@ -10,8 +10,10 @@
     "build": "ts-node scripts/build.ts && electron-builder",
     "release": "ts-node scripts/build.ts && electron-builder --publish=always",
     "test": "vitest",
+    "test:once": "vitest run",
     "test:main": "vitest run -r packages/main --passWithNoTests",
-    "test:renderer": "vitest run -r packages/renderer --passWithNoTests"
+    "test:renderer": "vitest run -r packages/renderer --passWithNoTests",
+    "eslint:fix": "eslint --fix ./**/*"
   },
   "repository": {
     "type": "git",
@@ -73,6 +75,7 @@
     "eslint": "^8.17.0",
     "eslint-plugin-vue": "^9.1.0",
     "happy-dom": "^6.0.4",
+    "husky": "^8.0.1",
     "sass": "^1.53.0",
     "ts-node": "^10.8.2",
     "typescript": "^4.5.4",

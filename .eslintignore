@@ -1,0 +1,9 @@
+node_modules
+.husky
+src/assets
+public
+dist
+**/*.json
+**/*.scss
+**/*.md
+yarn.lock
