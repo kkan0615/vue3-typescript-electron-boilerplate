@@ -68,6 +68,7 @@ export default {
 import packageJson from '../../../../../package.json'
 import { ref } from 'vue'
 import { useIpcRenderer } from '@vueuse/electron'
+import { useElectron } from '@/utils/useElectron'
 
 const version = packageJson.version
 
@@ -76,31 +77,31 @@ const isUpdateAvailable = ref(false)
 /* checking updating... */
 const isUpdateLoading = ref(false)
 
-const ipcRenderer = useIpcRenderer()
+const electron = useElectron()
 
 /**
  * Events update is available
  */
-ipcRenderer.on('update-available', () => {
+electron.on('update-available', () => {
   isUpdateAvailable.value = true
 })
 
-ipcRenderer.on('update-not-available', () => {
+electron.on('update-not-available', () => {
   isUpdateAvailable.value = false
 })
 
 const onClickCheckUpdateBtn = async () => {
   isUpdateLoading.value = true
-  await ipcRenderer.invoke('check-update')
+  await electron.invoke('check-update')
   isUpdateLoading.value = false
 }
 
 const onClickUpdateBtn = () => {
-  ipcRenderer.send('update-program')
+  electron.send('update-program')
 }
 
 const onClickHelloBtn = () => {
-  ipcRenderer.send('hello-world')
+  electron.send('hello-world')
 }
 </script>
 <style lang="scss">
