@@ -1,6 +1,6 @@
 import { autoUpdater } from 'electron-updater'
 import isDev from 'electron-is-dev'
-import { BrowserWindow, dialog, ipcMain, net, Notification } from 'electron'
+import { dialog, ipcMain, net, Notification } from 'electron'
 
 autoUpdater.on('error', async (error, message) => {
   if (!isDev) {
@@ -14,48 +14,69 @@ autoUpdater.on('error', async (error, message) => {
 })
 
 autoUpdater.on('update-not-available', async () => {
-  BrowserWindow.getAllWindows().map(window => {
-    window.webContents.send('update-not-available')
+  await dialog.showMessageBox({
+    title: 'Info',
+    message: 'It is latest version'
   })
 })
 
 /**
  * Check update when update is available when program is executed.
  */
-autoUpdater.on('update-available', (info) => {
-  // @TODO: Change to confirm
+autoUpdater.on('update-available', async (info) => {
   new Notification({
     title: 'update is available',
     body: `${info.version} is available`,
   }).show()
 
-  BrowserWindow.getAllWindows().map(window => {
-    window.webContents.send('update-available')
+  const { response } = await dialog.showMessageBox({
+    type: 'question',
+    buttons: [ 'Yes', 'No' ],
+    title: 'Update',
+    message: `${info.version} is available, Would like to update?`
   })
+
+  if (response === 0) {
+    if (net.isOnline()) {
+      await autoUpdater.quitAndInstall()
+      return true
+    } else {
+      await dialog.showMessageBox(null as any, {
+        type: 'error',
+        title: 'Error',
+        message: 'Error: Network is offline',
+        detail: 'Change to online to update',
+      })
+    }
+  }
+
+  return false
 })
 
 /**
  * check update is ready
- * @return boolean - if update is ready return true, else, return false
+ * @return { Object | null } - Update info or null
  */
-ipcMain.handle('check-update',async () => {
+ipcMain.handle('check-update', async () => {
   // Check update is only available when network is online
   if (net.isOnline()) {
-    await autoUpdater.checkForUpdates()
-  } else {
-    await dialog.showMessageBox(null as any, {
-      type: 'error',
-      title: 'Error',
-      message: 'Error: Network is offline',
-      detail: 'Change to online to check updates',
-    })
+    return await autoUpdater.checkForUpdates()
   }
+
+  await dialog.showMessageBox(null as any, {
+    type: 'error',
+    title: 'Error',
+    message: 'Error: Network is offline',
+    detail: 'Change to online to check updates',
+  })
+
+  return null
 })
 
 /**
  * Update program
  */
-ipcMain.on('update-program',async () => {
+ipcMain.on('update-program', async () => {
   if (net.isOnline()) {
     await autoUpdater.quitAndInstall()
   } else {
